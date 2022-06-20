@@ -44,19 +44,19 @@ namespace Task_55
 
         public void FindTopLevelPlayers()
         {
-            int topPlayer = 3;
+            int topPlayers = 3;
             List<Player> filteredPlayers = new List<Player>();
             Console.WriteLine("\n\nТоп 3 игроков по уровню:\n");
-            filteredPlayers = _players.OrderByDescending(player => player.Level).Take(topPlayer).ToList();
+            filteredPlayers = _players.OrderByDescending(player => player.Level).Take(topPlayers).ToList();
             ShowPlayers(filteredPlayers);
         }
 
         public void FindTopPowerPlayers()
         {
-            int topPlayer = 3;
+            int topPlayers = 3;
             List<Player> filteredPlayers = new List<Player>();
             Console.WriteLine("\n\nТоп 3 играков по силе:\n");
-            filteredPlayers = _players.OrderByDescending(player => player.Power).Take(topPlayer).ToList();
+            filteredPlayers = _players.OrderByDescending(player => player.Power).Take(topPlayers).ToList();
             ShowPlayers(filteredPlayers);
         }
 
