@@ -1,0 +1,95 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+/*
+ * У нас есть список всех игроков(минимум 10). У каждого игрока есть поля: имя, уровень, сила. 
+ * Требуется написать запрос для определения топ 3 игроков по уровню и топ 3 игроков по силе, после чего вывести каждый топ.
+2 запроса получится.
+ */
+
+namespace Task_55
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            DatabasePlayers databasePlayers = new DatabasePlayers();
+            databasePlayers.ShowAllPlayers();
+            databasePlayers.FindTopLevelPlayers();
+            databasePlayers.FindTopPowerPlayers();
+            Console.ReadKey();
+        }
+    }
+
+    class DatabasePlayers
+    {
+        private List<Player> _players = new List<Player>();
+
+        public DatabasePlayers()
+        {
+            _players.Add(new Player("Иван Иваныч", 28, 105));
+            _players.Add(new Player("Петр Петрович", 35, 148));
+            _players.Add(new Player("Сидр Сидорович", 42, 182));
+            _players.Add(new Player("Сергей Сергеевич", 18, 70));
+            _players.Add(new Player("Алексей Алексеевич", 24, 86));
+            _players.Add(new Player("Александр Александрович", 36, 154));
+            _players.Add(new Player("Ивана Ивановна", 41, 170));
+            _players.Add(new Player("Светлана Сергеевна", 19, 76));
+            _players.Add(new Player("Алекса Алексеевна", 22, 83));
+            _players.Add(new Player("Александра Александровна", 37, 181));
+        }
+
+        public void FindTopLevelPlayers()
+        {
+            List<Player> filteredPlayers = new List<Player>();
+            Console.WriteLine("\n\nТоп 3 игроков по уровню:\n");
+            filteredPlayers = _players.OrderByDescending(player => player.Level).Take(3).ToList();
+            ShowPlayers(filteredPlayers);
+        }
+
+        public void FindTopPowerPlayers()
+        {
+            List<Player> filteredPlayers = new List<Player>();
+            Console.WriteLine("\n\nТоп 3 играков по силе:\n");
+            filteredPlayers = _players.OrderByDescending(player => player.Power).Take(3).ToList();
+            ShowPlayers(filteredPlayers);
+        }
+
+        public void ShowAllPlayers()
+        {
+            Console.WriteLine("Список всех игроков:\n");
+            ShowPlayers(_players);
+        }
+
+        private void ShowPlayers(List<Player> players)
+        {
+            for (int i = 0; i < players.Count; i++)
+            {
+                Console.Write($"{i + 1}. ");
+                players[i].ShowInfoPlayer();
+            }
+        }
+    }
+
+    class Player
+    {
+        public string Name { get; private set; }
+        public int Level { get; private set; }
+        public int Power { get; private set; }
+
+        public Player(string name, int level, int power)
+        {
+            Name = name;
+            Level = level;
+            Power = power;
+        }
+
+        public void ShowInfoPlayer()
+        {
+            Console.WriteLine($"Имя игрока: {Name}. Уровень - {Level}. Сила - {Power}.");
+        }
+    }
+}
