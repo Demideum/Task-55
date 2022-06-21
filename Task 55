@@ -47,7 +47,7 @@ namespace Task_55
         public void FindTopLevelPlayers()
         {
             List<Player> filteredPlayers = new List<Player>();
-            Console.WriteLine("\n\nТоп 3 игроков по уровню:\n");
+            Console.WriteLine($"\n\nТоп {_maxTopPlayers} игроков по уровню:\n");
             filteredPlayers = _players.OrderByDescending(player => player.Level).Take(_maxTopPlayers).ToList();
             ShowPlayers(filteredPlayers);
         }
@@ -55,7 +55,7 @@ namespace Task_55
         public void FindTopPowerPlayers()
         {
             List<Player> filteredPlayers = new List<Player>();
-            Console.WriteLine("\n\nТоп 3 играков по силе:\n");
+            Console.WriteLine($"\n\nТоп {_maxTopPlayers} играков по силе:\n");
             filteredPlayers = _players.OrderByDescending(player => player.Power).Take(_maxTopPlayers).ToList();
             ShowPlayers(filteredPlayers);
         }
