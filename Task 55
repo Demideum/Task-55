@@ -27,9 +27,11 @@ namespace Task_55
     class DatabasePlayers
     {
         private List<Player> _players = new List<Player>();
+        private int _maxTopPlayers;
 
         public DatabasePlayers()
         {
+            _maxTopPlayers = 3;
             _players.Add(new Player("Иван Иваныч", 28, 105));
             _players.Add(new Player("Петр Петрович", 35, 148));
             _players.Add(new Player("Сидр Сидорович", 42, 182));
@@ -44,19 +46,17 @@ namespace Task_55
 
         public void FindTopLevelPlayers()
         {
-            int topPlayers = 3;
             List<Player> filteredPlayers = new List<Player>();
             Console.WriteLine("\n\nТоп 3 игроков по уровню:\n");
-            filteredPlayers = _players.OrderByDescending(player => player.Level).Take(topPlayers).ToList();
+            filteredPlayers = _players.OrderByDescending(player => player.Level).Take(_maxTopPlayers).ToList();
             ShowPlayers(filteredPlayers);
         }
 
         public void FindTopPowerPlayers()
         {
-            int topPlayers = 3;
             List<Player> filteredPlayers = new List<Player>();
             Console.WriteLine("\n\nТоп 3 играков по силе:\n");
-            filteredPlayers = _players.OrderByDescending(player => player.Power).Take(topPlayers).ToList();
+            filteredPlayers = _players.OrderByDescending(player => player.Power).Take(_maxTopPlayers).ToList();
             ShowPlayers(filteredPlayers);
         }
 
